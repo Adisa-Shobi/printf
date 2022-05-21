@@ -9,22 +9,24 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, count = 0;
+	int i = 0, count = 0;
+
+	f_ptr print_func;
 
 	char curr;
 
 	va_list args;
 
 	va_start(args, format);
-	if (!format || (_strlen((char *)format) == 0))
+	if (!format)
 	{
 		return (-1);
 	}
 
-	for (i = 0 ; format[i] != '\0' ; i++)
+	while (format[i] != '\0')
 	{
 		curr = format[i];
-		if (curr == '%' || format[i] == '\\')
+		if (curr == '%')
 		{
 			i++;
 			curr = format[i];
@@ -32,13 +34,18 @@ int _printf(const char *format, ...)
 				return (-1);
 			if (curr == '\0')
 				return (count);
-			count += printf_controller(curr, args);
+			print_func = printf_controller(curr);
+			if (print_func != NULL)
+				count += print_func(args);
+			else
+				count += _putchar(curr);
 		}
 		else
 		{
-			_putchar(curr);
-			count += 1;
+			count += _putchar(curr);
 		}
+		i++;
 	}
+	va_end(args);
 	return (count);
 }

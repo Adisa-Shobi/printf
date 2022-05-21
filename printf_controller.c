@@ -6,40 +6,32 @@
  *printf_controller - function that controles the specifiers
  *
  *@s: The character the specifies behavior
- *@list: The list of agruments
  *Return: an integer of number of characters printed, 0 if unssuccesful
  */
-int printf_controller(char s, va_list list)
+int (*printf_controller(char s))(va_list)
 {
-	char *str;
+	func functions[] = {
+		{"c", _print_char},
+		{"s", _print_string},
+		{"d", _print_signedint},
+		{"i", _print_signedint},
+		{"b", _print_binary},
+		{"u", _print_unsignedint},
+		{"o", _print_octal},
+		{NULL, NULL}
+	};
+
+	int i = 0;
 
 	if (!s)
-		return (0);
-	switch (s)
+		return (NULL);
+	while (functions[i].spec != NULL)
 	{
-	case 'c':
-		_putchar(va_arg(list, int));
-		return (1);
-	case 's':
-		str = va_arg(list, char *);
-		_puts(str);
-		return (_strlen(str));
-	case '%':
-		_putchar('%');
-		return (1);
-	case 'n':
-		_putchar('\n');
-		return (1);
-	case 't':
-		_putchar('\t');
-		return (1);
-	case 'd':
-	case 'i':
-		return (print_number(va_arg(list, int)));
-	case 'b':
-		print_binary(va_arg(list, int));
-		return (0);
+		if (s == *(functions[i].spec))
+		{
+			return (functions[i].f);
+		}
+		i++;
 	}
-	_putchar(s);
-	return (1);
+	return (NULL);
 }
