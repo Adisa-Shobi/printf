@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	if (!format)
+	if (!format || (_strlen((char *)format) == 0))
 	{
 		return (-1);
 	}
@@ -34,10 +34,11 @@ int _printf(const char *format, ...)
 				return (-1);
 			if (curr == '\0')
 				return (count);
-			print_func = printf_controller(curr);
+			if (curr)
+				print_func = printf_controller(curr);
 			if (print_func != NULL)
 				count += print_func(args);
-			else
+			else if (curr == '%')
 				count += _putchar(curr);
 		}
 		else

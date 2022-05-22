@@ -23,8 +23,6 @@ int (*printf_controller(char s))(va_list)
 
 	int i = 0;
 
-	if (!s)
-		return (NULL);
 	while (functions[i].spec != NULL)
 	{
 		if (s == *(functions[i].spec))
