@@ -18,7 +18,7 @@ int _print_signedint(va_list args)
 		_putchar('-');
 		n *= -1;
 	}
-	str = convert_to(n, 10);
+	str = convert_to(n, 10, 0);
 	_puts(str);
 	count = _strlen(str);
 	return (count);
@@ -36,7 +36,7 @@ int _print_unsignedint(va_list args)
 
 	int n = va_arg(args, unsigned int), count = 0;
 
-	str = convert_to(n, 10);
+	str = convert_to(n, 10, 0);
 	_puts(str);
 	count = _strlen(str);
 	return (count);

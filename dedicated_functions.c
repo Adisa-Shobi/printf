@@ -1,5 +1,7 @@
 #include "main.h"
+#include <stdlib.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 
 /**
@@ -9,15 +11,25 @@
  *@i: integer
  *Return: The string to return
  */
-char *convert_to(unsigned int i, int base)
+char *convert_to(unsigned int i, int base, ...)
 {
-	const char representation[] = {"0123456789ABCDEF"};
+	va_list mode;
 
-	char *ptr;
+	char *ptr, U;
 
 	static char buffer[128];
 
 	int mod = 0;
+
+	char *conversion;
+
+	conversion = malloc(sizeof(char) * 17);
+	va_start(mode, base);
+	U = va_arg(mode, int);
+	if (U == 1)
+		conversion = _strcpy(conversion, "0123456789ABCDEF");
+	else
+		conversion = _strcpy(conversion, "0123456789abcdef");
 
 	ptr = &buffer[127];
 	*ptr = '\0';
@@ -25,7 +37,7 @@ char *convert_to(unsigned int i, int base)
 	while (i != 0)
 	{
 		mod = i % base;
-		*--ptr = representation[mod];
+		*--ptr = conversion[mod];
 		i = i / base;
 	}
 	return (ptr);
@@ -79,4 +91,23 @@ void _puts(char *s)
 		_putchar(s[i]);
 		i++;
 	}
+}
+
+/**
+ *_strcpy - copies one string to another
+ *
+ *@dest: The destination string
+ *@src: The source string
+ *Return: The destination pointer
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int i, len;
+
+	len  = _strlen(src);
+	for (i = 0 ; i <= len ; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
 }

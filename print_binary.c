@@ -14,7 +14,7 @@ int _print_binary(va_list args)
 
 	char *s;
 
-	s = convert_to(i, 2);
+	s = convert_to(i, 2, 0);
 	_puts(s);
 	count = _strlen(s);
 	return (count);

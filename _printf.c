@@ -10,11 +10,8 @@
 int _printf(const char *format, ...)
 {
 	int i = 0, count = 0;
-
 	f_ptr print_func;
-
 	char curr;
-
 	va_list args;
 
 	va_start(args, format);
@@ -22,7 +19,6 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-
 	while (format[i] != '\0')
 	{
 		curr = format[i];
@@ -40,13 +36,23 @@ int _printf(const char *format, ...)
 				count += print_func(args);
 			else if (curr == '%')
 				count += _putchar(curr);
+			else
+			{
+				count += _putchar('%');
+				count += _putchar(curr);
+			}
 		}
 		else
-		{
 			count += _putchar(curr);
-		}
 		i++;
 	}
 	va_end(args);
 	return (count);
 }
+
+/**
+ *print_handler - handles and checks for specifiers
+ *
+ *@
+ *
+ */

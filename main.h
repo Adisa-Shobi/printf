@@ -17,8 +17,13 @@ int _print_string(va_list args);
 int _print_signedint(va_list args);
 int _print_unsignedint(va_list args);
 int _print_char(va_list args);
-char *convert_to(unsigned int i, int base);
+char *convert_to(unsigned int i, int base, ...);
 int _print_binary(va_list args);
 int _print_octal(va_list args);
+int _print_upper_hexadecimal(va_list args);
+int _print_lower_hexadecimal(va_list args);
+int _print_rot13(va_list args);
+int _print_rev_string(va_list args);
+char *_strcpy(char *dest, char *src);
 
 #endif /* MAIN_H */

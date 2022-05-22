@@ -15,7 +15,7 @@ int _print_octal(va_list args)
 
 	unsigned int n = va_arg(args, unsigned int);
 
-	str = convert_to(n, 8);
+	str = convert_to(n, 8, 0);
 	_puts(str);
 	count = _strlen(str);
 	return (count);

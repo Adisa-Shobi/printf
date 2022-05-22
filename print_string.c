@@ -10,14 +10,15 @@
  */
 int _print_string(va_list args)
 {
-	int k = 0;
-
 	char *str = va_arg(args, char *);
 
-	while (str[k] != '\0')
+	if (!str)
 	{
-		_putchar(str[k]);
-		k++;
+		str = "(null)";
+		_puts(str);
+
+		return (_strlen(str));
 	}
-	return (k); /* might be k + 1 */
+	_puts(str);
+	return (_strlen(str)); /* might be k + 1 */
 }

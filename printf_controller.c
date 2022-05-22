@@ -18,6 +18,10 @@ int (*printf_controller(char s))(va_list)
 		{"b", _print_binary},
 		{"u", _print_unsignedint},
 		{"o", _print_octal},
+		{"x", _print_lower_hexadecimal},
+		{"X", _print_upper_hexadecimal},
+		{"R", _print_rot13},
+		{"r", _print_rev_string},
 		{NULL, NULL}
 	};
 
